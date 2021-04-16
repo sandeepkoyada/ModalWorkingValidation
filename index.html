@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Task 1
+    </title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
+
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+    <div class="container">
+      
+
+        <div class='page-header'>
+            <div class='btn-toolbar pull-right'>
+                <button type="button"  id="modalid" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Click here to Open Modal
+                  </button>
+               
+            </div>
+                  <h2>User Details</h2>
+                  <span id="sucessfulsub"></span>
+                  
+          </div>
+        
+
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="exampleModalLabel">Personal Details</h1>
+              <span id="failedid"></span>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="myform">
+                
+
+                <form id="basic-form" class="form-group">
+                    <p>
+                      <label for="uname">Name <span>* at least 3 characters</span></label>
+                      <input type="text" id="uname" name="uname" class="form-control">
+                    </p>
+
+                  <p>
+                      <label for="fname">First Name <span>*</span></label>
+                      <input id="fname" name="fname" class="form-control">
+                    </p>
+                    <p>
+                        <label for="lname">Last Name <span>*</span></label>
+                        <input id="lname" name="lname" class="form-control"> 
+                      </p>
+                      
+                    <p>
+                      <label for="email">E-Mail <span>*</span></label>
+                      <input id="email" name="email" class="form-control">
+                    </p>
+                  <p>
+                    <label for="phone">Phone <span>*</span></label>
+                    <input id="phone" name="phone" class="form-control">
+                    </p>
+                    <p>
+                      <input class="submit btn btn-primary" type="submit" id="submitid" value="SUBMIT"data-dismiss="modal" >
+                    </p>
+                </form>
+            
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+               
+           
+      
+            
+                <table id="usertable" class="table w-auto">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    <td id=unameid></th>
+                    <td> <p id="fnameid"></p>   </td>
+                    <td> <p id="lnameid"></p>  </td>
+                    <td><p id="emailid"></p>  </td>
+                    <td><p id="phoneid"></p>  </td>
+
+                    </tbody>
+                </table>
+        
+        
+    </div>
+   
+</body>
+
+</html>
