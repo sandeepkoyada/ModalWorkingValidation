@@ -46,9 +46,6 @@ function newData(data) {
 
 function EmptyForm() {
 
-  
-            
-  
   $("#sucessfulsub").text("")
   $("#basic-form").data('validator').resetForm();
   $("label").removeClass("error.fail-alert");
@@ -88,23 +85,13 @@ function update(formData) {
 
 $(document).ready(function() {
     $("#modalid").click(function(){
-        
-    validate();
-    EmptyForm();
-    
+      validate();
+      EmptyForm();
     });
 
     $("#submitid").click(function(event){
         event.preventDefault();
-       
-        
-        
-          FormData();
-         
-        
-        
-        
-        
+        FormData(); 
     });
     
     });
@@ -166,41 +153,39 @@ $(document).ready(function() {
               }
             }
           });
-
-          
     }
     
-    
-
-
 function validation(){
 
       let utrue=false;
       if($("#uname").val().length>=3){
          utrue=true
       }
+
       let ftrue=false;
       if($("#fname").val().length>=1){
         ftrue=true;
       }
+
       let ltrue=false;
       if($("#lname").val().length>=1){
         ltrue=true;
       }
+
       let isemail;
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var email=$("#email").val()
-        if(!regex.test(email)) {
-          isemail= false;
-        }else{
+        if(regex.test(email)) {
           isemail= true;
         }
+
       let ptrue=false;
       if($("#phone").val().length===10){
          ptrue=true;
       }
+
       if(utrue==false || ftrue==false ||  ltrue==false || ptrue==false || isemail==false) {
-        $("#failedid").text("please enter all details")
+        $("#failedid").text("please enter all the details")
         $('#submitid').removeAttr('data-dismiss');
         return false;
         
@@ -210,9 +195,6 @@ function validation(){
         $('#submitid').attr("data-dismiss","modal");  
        return true;
        }
-       
-      
-      
     
 }
 
