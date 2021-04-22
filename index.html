@@ -33,12 +33,23 @@
         <div class='page-header'>
             <div class='btn-toolbar pull-right'>
                 <button type="button"  id="modalid" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Click here to Open Modal
+                    Click here to Enter Details
+                  </button>
+                  <button type="button"  id="saveid" class="btn btn-danger" data-toggle="modal" >
+                    save
+                  </button>
+                  <button type="button"  id="delid" class="btn btn-danger" data-toggle="modal" >
+                    del
                   </button>
                
             </div>
                   <h2>User Details</h2>
                   <span id="sucessfulsub"></span>
+                  <span id="unamestore"></span>
+                  <span id="fnamestore"></span>
+                  <span id="lnamestore"></span>
+                  <span id="emailstore"></span>
+                  <span id="phonestore"></span>
                   
           </div>
         
@@ -58,35 +69,35 @@
             </div>
             <div class="modal-body" id="myform">
                 
-
-                <form id="basic-form" class="form-group">
+                <form id="basic-form">
+                <form id="basic-form" class="form-group" autocomplete="on">
                     <p>
                       <label for="uname">Name <span>* at least 3 characters</span></label>
-                      <input type="text" id="uname" name="uname" class="form-control">
+                      <input type="text" id="uname" name="uname" class="form-control" autocomplete="off">
                     </p>
 
                   <p>
                       <label for="fname">First Name <span>*</span></label>
-                      <input id="fname" name="fname" class="form-control">
+                      <input id="fname" name="fname" class="form-control" autocomplete="off">
                     </p>
                     <p>
                         <label for="lname">Last Name <span>*</span></label>
-                        <input id="lname" name="lname" class="form-control"> 
+                        <input id="lname" name="lname" class="form-control" autocomplete="off"> 
                       </p>
                       
                     <p>
                       <label for="email">E-Mail <span>*</span></label>
-                      <input id="email" name="email" class="form-control">
+                      <input id="email" name="email" class="form-control" autocomplete="off">
                     </p>
                   <p>
                     <label for="phone">Phone <span>*</span></label>
-                    <input id="phone" name="phone" class="form-control">
+                    <input id="phone" name="phone" class="form-control" autocomplete="off">
                     </p>
                     <p>
-                      <input class="submit btn btn-primary" type="submit" id="submitid" value="SUBMIT"data-dismiss="modal" >
+                      <input class="submit btn btn-primary" type="submit" id="submitid" value="SUBMIT" >
                     </p>
                 </form>
-            
+              </form>
 
 
 
@@ -99,11 +110,11 @@
 
       
                
-              
+
       
-            
+      <div class="table-responsive table-striped">
                 <table id="usertable" class="table w-auto">
-                    <thead class="thead-dark">
+                   
                         <tr>
                             <th>User Name</th>
                             <th>First Name</th>
@@ -112,17 +123,9 @@
                             <th>Phone</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    <td id=unameid></th>
-                    <td> <p id="fnameid"></p>   </td>
-                    <td> <p id="lnameid"></p>  </td>
-                    <td><p id="emailid"></p>  </td>
-                    <td><p id="phoneid"></p>  </td>
-
-                    </tbody>
+                   
                 </table>
-        
+        </div>
         
     </div>
    

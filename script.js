@@ -1,19 +1,14 @@
 var selectedRow = null
 
-
-
-
 function FormData() {
-    if(validation()){
       $("#sucessfulsub").text("Details Submitted Succesfully")
         var formData = reader();
+       
         if (selectedRow == null){
             newData(formData);
         }
         else
             update(formData);
-    }
-    
 }
 
 function reader() {
@@ -42,10 +37,10 @@ function newData(data) {
     cell5.innerHTML = data.phone;
     cell6 = newRow.insertCell(5);
     cell6.innerHTML = `<a onclick="editfun(this)"><p data-toggle='modal' data-target='#exampleModal' >Edit <span class='glyphicon glyphicon-pencil'></span></p></a>`;
-}
+  }
 
 function EmptyForm() {
-
+  $("#failedid").text("")
   $("#sucessfulsub").text("")
   $("#basic-form").data('validator').resetForm();
   $("label").removeClass("error.fail-alert");
@@ -71,7 +66,7 @@ function editfun(td) {
     $("#lname").val(selectedRow.cells[2].innerHTML) 
     $("#email").val(selectedRow.cells[3].innerHTML) 
     $("#phone").val(selectedRow.cells[4].innerHTML)
-
+    
 }
 function update(formData) {
     selectedRow.cells[0].innerHTML  = formData.username;
@@ -83,7 +78,54 @@ function update(formData) {
 
 
 
+window.onload = function() 
+{
+  if(localStorage.length>0){
+      var retrievedData = localStorage.getItem("quentinTarantino");
+
+      var movies2 = JSON.parse(retrievedData);
+
+      var student=""
+
+  $.each(movies2, function (key, value) {
+  
+    student += '<tr>';
+      student += '<td>' + 
+        value.username + '</td>';
+
+      student += '<td>' + 
+        value.firstname + '</td>';
+
+      student += '<td>' + 
+        value.lastname + '</td>';
+
+      student += '<td>' + 
+        value.email + '</td>';
+    
+      student += '<td>' + 
+        value.phone + '</td>';
+
+      student+='<td>'+ `<a onclick="editfun(this)"><p data-toggle='modal' data-target='#exampleModal' >Edit <span class='glyphicon glyphicon-pencil'></span></p></a>`+
+    '</td>'
+          student += '</tr>';
+});
+
+$('#usertable').append(student);
+}
+else
+$("#sucessfulsub").text("No Data Available in local storage")
+
+}
+
+//document ready
+
 $(document).ready(function() {
+
+  $("#delid").click(function(){
+    $("#sucessfulsub").text("Data Deleted From localstorage refresh page")
+    localStorage.clear();
+    });
+
     $("#modalid").click(function(){
       validate();
       EmptyForm();
@@ -94,10 +136,64 @@ $(document).ready(function() {
         FormData(); 
     });
     
-    });
-    
-    function validate(){
+    $("#saveid").click(function(event){
 
+      $("#sucessfulsub").text("Details Saved")
+      var table = document.getElementById("usertable");
+
+      var data = [];
+    var headers = [];
+    for (var i=0; i<table.rows[0].cells.length; i++) {
+        headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+    }
+    for (var i=1; i<table.rows.length; i++) {
+
+        var tableRow = table.rows[i];
+        var rowData = {};
+
+        for (var j=0; j<tableRow.cells.length; j++) {
+
+            rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+        }
+
+        data.push(rowData);
+    }
+    var kaat=JSON.stringify(data)
+       
+    localStorage.setItem("quentinTarantino", kaat);
+    
+    console.log(kaat)
+
+  });
+
+
+  var toValidate = jQuery('#uname, #fname, #lname, #email,#phone'),
+    valid = false;
+toValidate.keyup(function () {
+    if (jQuery(this).val().length > 0) {
+        jQuery(this).data('valid', true);
+    } else {
+        jQuery(this).data('valid', false);
+    }
+    toValidate.each(function () {
+        if (jQuery(this).data('valid') == true) {
+            valid = true;
+        } else {
+            valid = false;
+        }
+    });
+    if (valid === true) {
+        jQuery("#submitid").prop('disabled', false);
+    } else {
+      $('#submitid').attr("data-dismiss","modal");  
+        jQuery("#submitid").prop('disabled', true);
+    }
+});
+    });
+  
+    //jquery validation
+    function validate(){
         $("#basic-form").validate({
             errorClass: "error fail-alert",
             validClass: "valid success-alert",
@@ -119,7 +215,8 @@ $(document).ready(function() {
                 },
               email: {
                 required: true,
-                email: true
+                email: true,
+                customemail:true
               },
               phone : {
                 required: true,
@@ -154,49 +251,82 @@ $(document).ready(function() {
             }
           });
     }
-    
-function validation(){
+    $.validator.addMethod("customemail", 
+    function(value, element) {
+        return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.((com)|(org)|(co.in)|(net))$/.test(value);
+    }, 
+    "Sorry, the domain extension is not allowed."
+);
+  
 
-      let utrue=false;
-      if($("#uname").val().length>=3){
-         utrue=true
-      }
 
-      let ftrue=false;
-      if($("#fname").val().length>=1){
-        ftrue=true;
-      }
 
-      let ltrue=false;
-      if($("#lname").val().length>=1){
-        ltrue=true;
-      }
 
-      let isemail;
-        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        var email=$("#email").val()
-        if(regex.test(email)) {
-          isemail= true;
-        }
 
-      let ptrue=false;
-      if($("#phone").val().length===10){
-         ptrue=true;
-      }
 
-      if(utrue==false || ftrue==false ||  ltrue==false || ptrue==false || isemail==false) {
-        $("#failedid").text("please enter all the details")
-        $('#submitid').removeAttr('data-dismiss');
-        return false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function validation(){
+
+//       let utrue=false;
+//       if($("#uname").val().length>=3){
+//          utrue=true
+//       }
+
+//       let ftrue=false;
+//       if($("#fname").val().length>=1){
+//         ftrue=true;
+//       }
+
+//       let ltrue=false;
+//       if($("#lname").val().length>=1){
+//         ltrue=true;
+//       }
+
+//       let isemail;
+//         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+//         var email=$("#email").val()
+//         if(regex.test(email)) {
+//           isemail= true;
+//         }
+
+//       let ptrue=false;
+//       if($("#phone").val().length===10){
+//          ptrue=true;
+//       }
+
+
+//       if(utrue==false || ftrue==false ||  ltrue==false || ptrue==false || isemail==false) {
+//         $("#failedid").text("please enter all the details")
+//         $('#submitid').removeAttr('data-dismiss');
+//         return false;
         
-       }
-       else{
-        $("#failedid").text("")
-        $('#submitid').attr("data-dismiss","modal");  
-       return true;
-       }
+//        }
+//        else{
+//         $("#failedid").text("")
+//         $('#submitid').attr("data-dismiss","modal");  
+//        return true;
+//        }
     
-}
+// }
 
 
 
